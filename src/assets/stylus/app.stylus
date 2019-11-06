@@ -98,10 +98,18 @@ table {
 }
 html,body{
   height: 100%;
+  box-sizing: border-box;
 }
 
 .a{
   cursor: pointer;
 }
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
 
 

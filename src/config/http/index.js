@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
+import route from '@/router'
 
 axios.defaults.timeout = 5000
 
@@ -27,6 +28,8 @@ const handleError = (status, content) => {
       break;
     case 401:
       // 登录失效
+      route.push({name:'login'})
+      sessionStorage.removeItem('AUTH_TOKEN')
       errorTip('登录失效，请重新登录', 2000);
       break;
     case 403:
@@ -44,7 +47,7 @@ const handleError = (status, content) => {
   }
 };
 
-axios.interceptor.request.use(
+axios.interceptors.request.use(
   config => {
     // 请求头添加auth token
     const AUTH_TOKEN = sessionStorage.getItem('AUTH_TOKEN');
@@ -62,11 +65,10 @@ axios.interceptor.request.use(
 axios.interceptors.response.use(
   response =>
     response.status === 200
-      ? Promise.resolve(response)
+      ? Promise.resolve(response.data)
       : Promise.reject(response),
   error => {
     const { response } = error;
-
     if (response.status < 500) {
       handleError(response.status, response.statusText);
     } else {

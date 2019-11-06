@@ -11,10 +11,27 @@ const routes = [
     component: login
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/home',
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/home.vue'),
+    children: [
+      {
+        path: '/',
+        name: 'home',
+        component: () => import(/* webpackChunkName: "about" */ '../views/postList.vue'),
+        meta:{
+          Auth:true
+        }
+      },
+      {
+        path: 'edit',
+        name: 'edit',
+        component: () => import(/* webpackChunkName: "about" */ '../views/edit.vue'),
+        meta:{
+          Auth:true
+        }
+      }
+    ]
   }
 ]
 
