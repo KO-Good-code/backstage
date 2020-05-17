@@ -63,7 +63,7 @@ export default {
         this.data = res
         this.loading = false
       } catch (error) {
-        console.log(error)
+        // console.log(error)
         this.loading = false
       }
     },
@@ -103,7 +103,7 @@ export default {
           this.$message.error(res.msg)
         }
       } catch (error) {
-        console.log(error)
+        // console.log(error)
       }
     }
   }

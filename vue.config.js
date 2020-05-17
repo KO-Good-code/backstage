@@ -1,3 +1,4 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 let externals = {};
 if (process.env.NODE_ENV === 'production') {
   externals = {
@@ -11,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 process.env.VUE_APP_VERSION = require('./package.json').version;
 
 module.exports = {
-  publicPath:process.env.VUE_APP_REALEASE === 'production' ? 'https://cdn-activities.mini1.cn/ssxt-pvp/':'/',
+  publicPath:'/',
   productionSourceMap: false,
   // devServer: {
   //   proxy: {
@@ -27,8 +28,25 @@ module.exports = {
   //     }
   //   }
   // },
-  configureWebpack: {
-    externals
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        new UglifyJsPlugin({
+          uglifyOptions:{
+            warnings:false,
+            compress:{
+              drop_debugger:true,
+              drop_console:true,
+              pure_funcs:['console.log']
+            },
+            output:{
+              comments:false
+            }
+          }
+        })
+      )
+    }
+    return {externals}
   },
   chainWebpack: config => {
     config.plugin('html').tap(args => {

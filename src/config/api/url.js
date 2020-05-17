@@ -1,2 +1,2 @@
-export const url = 'http://127.0.0.1:8080/api/console/'
-export const baseUrl = 'http://127.0.0.1:8080/api/'
+export const url = process.env.NODE_ENV == 'production' ? '/api/console/' : 'http://127.0.0.1:8080/api/console/'
+export const baseUrl = process.env.NODE_ENV == 'production' ? '/api/' : 'http://127.0.0.1:8080/api/'
