@@ -13,12 +13,12 @@ const routes = [
   {
     path: '/home',
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/home.vue'),
+    component: () => import(/* webpackChunkName: "home" */ '../views/home.vue'),
     children: [
       {
         path: '/',
         name: 'home',
-        component: () => import(/* webpackChunkName: "about" */ '../views/postList.vue'),
+        component: () => import(/* webpackChunkName: "postList" */ '../views/postList.vue'),
         meta:{
           Auth:true
         }
@@ -26,13 +26,24 @@ const routes = [
       {
         path: 'edit',
         name: 'edit',
-        component: () => import(/* webpackChunkName: "about" */ '../views/edit.vue'),
+        component: () => import(/* webpackChunkName: "edit" */ '../views/edit.vue'),
         meta:{
           Auth:true
         }
+      },
+      {
+        path: 'project',
+        name: 'project',
+        component: () => import(/* webpackChunkName: "project" */ '../views/project.vue'),
+      },
+      {
+        path: 'fund',
+        name: 'fund',
+        component: () => import(/* webpackChunkName: "fund" */ '../views/fund.vue'),
       }
     ]
-  }
+  },
+  
 ]
 
 const router = new VueRouter({

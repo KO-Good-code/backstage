@@ -7,7 +7,7 @@
     border
     style="width: 100%">
     <el-table-column
-      prop="id"
+      type="index"
       label="id">
     </el-table-column>
     <el-table-column
@@ -19,8 +19,10 @@
       label="标签">
     </el-table-column>
     <el-table-column
-      prop="time"
       label="最后修改时间">
+      <template slot-scope="scope">
+        {{scope.row.time | date}}
+      </template>
     </el-table-column>
     <el-table-column
       fixed="right"
@@ -60,10 +62,9 @@ export default {
           pageSize:1
         }
         const res = await this.$http.getPostList({params})
-        this.data = res
+        this.data = res.data
         this.loading = false
       } catch (error) {
-        // console.log(error)
         this.loading = false
       }
     },

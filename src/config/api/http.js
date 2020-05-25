@@ -8,9 +8,9 @@ const fn = api => {
       method
     } = api[o]
     result[o] = obj => {
-      let { params, body } = obj
+      let { params, body, onUploadProgress } = obj
       if(method == "get") {
-        return http[method](path, {params})
+        return http[method](path, {params, onUploadProgress:onUploadProgress})
       }else{
         return http[method](path, body)
       }

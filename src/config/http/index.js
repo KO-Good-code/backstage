@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import route from '@/router'
 
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 60000
 
 /**
  * 错误提示
