@@ -42,7 +42,9 @@ export default {
   data () {
     return {
       data: null,
-      loading: false
+      loading: false,
+      page: 1,
+      pageSize: 10
     };
   },
 
@@ -59,7 +61,8 @@ export default {
       try {
         this.loading = true
         let params = {
-          pageSize:1
+          pageSize:this.pageSize,
+          page: this.page
         }
         const res = await this.$http.getPostList({params})
         this.data = res.data
