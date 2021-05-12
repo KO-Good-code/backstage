@@ -14,20 +14,15 @@ process.env.VUE_APP_VERSION = require('./package.json').version;
 module.exports = {
   publicPath:'/',
   productionSourceMap: false,
-  // devServer: {
-  //   proxy: {
-  //     '/pvp/': {
-  //       // target: 'http://pvp-test.mini.me/',
-  //       target: 'http://10.0.0.203:3070',
-  //       changeOrigin: true
-  //     },
-  //     '/user/': {
-  //       // target: 'http://pvp-test.mini.me/',
-  //       target: 'http://10.0.0.203:3070',
-  //       changeOrigin: true
-  //     }
-  //   }
-  // },
+  devServer: {
+    proxy: {
+      '/': {
+        // target: 'http://pvp-test.mini.me/',
+        target: 'http://back.codedevil.cn/',
+        changeOrigin: true
+      }
+    }
+  },
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(

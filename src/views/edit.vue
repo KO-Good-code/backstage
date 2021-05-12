@@ -100,7 +100,7 @@ export default {
           post_id:this.wid
         }
         const res = await this.$http.getPost({params})
-        this.form = res
+        this.form = res.data;
         // if(res.code == 200) {
         //   this.$message.success(res.msg)
         // }else{
